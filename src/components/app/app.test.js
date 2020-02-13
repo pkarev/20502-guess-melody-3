@@ -8,8 +8,8 @@ const Settings = {
 
 it(`Render App`, () => {
   const tree = renderer
-  .create(<App errorsCount={Settings.ERRORS_COUNT}/>)
-  .toJSON();
+    .create(<App errorsCount={Settings.ERRORS_COUNT}/>)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
