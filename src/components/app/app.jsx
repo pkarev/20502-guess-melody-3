@@ -1,6 +1,6 @@
 import React from 'react';
-import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import PropTypes from 'prop-types';
+import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 
 const App = ({errorsCount}) => <WelcomeScreen errorsCount={errorsCount}/>;
 
