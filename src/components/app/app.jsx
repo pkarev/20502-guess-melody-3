@@ -13,7 +13,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {errorsCount} = this.props;
+    const {errorsCount, questions} = this.props;
 
     return (
       <BrowserRouter>
@@ -24,11 +24,11 @@ class App extends PureComponent {
               onWelcomeButtonClick={welcomeButtonHandler}
             />
           </Route>
-          <Route exact path="/artist">
-            <QuestionArtistScreen/>
-          </Route>
           <Route exact path="/genre">
-            <QuestionGenreScreen/>
+            <QuestionGenreScreen question={questions[0]}/>
+          </Route>
+          <Route exact path="/artist">
+            <QuestionArtistScreen question={questions[1]}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -38,6 +38,22 @@ class App extends PureComponent {
 
 App.propTypes = {
   errorsCount: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.shape({
+      genre: PropTypes.string,
+      tracks: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        genre: PropTypes.string,
+      })),
+    }),
+    PropTypes.shape({
+      artist: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        artist: PropTypes.string,
+      })),
+    }),
+  ])),
 };
 
 export default App;

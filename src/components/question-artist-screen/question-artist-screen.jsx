@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const QuestionArtistScreen = () => (
+const QuestionArtistScreen = ({question: {options}}) => (
   <section className="game game--artist">
     <header className="game__header">
       <a className="game__back" href="#">
@@ -41,32 +42,28 @@ const QuestionArtistScreen = () => (
       </div>
 
       <form className="game__artist">
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1"/>
-          <label className="artist__name" htmlFor="answer-1">
-            <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-            Пелагея
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2"/>
-          <label className="artist__name" htmlFor="answer-2">
-            <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-            Краснознаменная дивизия имени моей бабушки
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3"/>
-          <label className="artist__name" htmlFor="answer-3">
-            <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-            Lorde
-          </label>
-        </div>
+        {options.map((option) => (
+          <div className="artist" key={option.id}>
+            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1"/>
+            <label className="artist__name" htmlFor="answer-1">
+              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
+              {option.name}
+            </label>
+          </div>
+        ))}
       </form>
     </section>
   </section>
 );
+
+QuestionArtistScreen.propTypes = {
+  question: PropTypes.shape({
+    artist: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      artist: PropTypes.string,
+    })),
+  }),
+};
 
 export default QuestionArtistScreen;

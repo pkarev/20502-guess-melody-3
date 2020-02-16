@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-
-const Settings = {
-  ERRORS_COUNT: 3,
-};
+import gameSettings from './mocks/game-settings.js';
+import questions from './mocks/questions.js';
 
 ReactDOM.render(
-    <App errorsCount={Settings.ERRORS_COUNT}/>,
+    <App errorsCount={gameSettings.ERRORS_COUNT} questions={questions}/>,
     document.querySelector(`#root`)
 );
