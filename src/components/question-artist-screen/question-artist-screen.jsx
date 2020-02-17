@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const QuestionArtistScreen = ({question: {options}}) => (
+const QuestionArtistScreen = ({question: {options}, handleAnswer}) => (
   <section className="game game--artist">
     <header className="game__header">
       <a className="game__back" href="#">
@@ -43,7 +43,7 @@ const QuestionArtistScreen = ({question: {options}}) => (
 
       <form className="game__artist">
         {options.map((option) => (
-          <div className="artist" key={option.id}>
+          <div className="artist" key={option.id} onClick={handleAnswer}>
             <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1"/>
             <label className="artist__name" htmlFor="answer-1">
               <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
@@ -64,6 +64,7 @@ QuestionArtistScreen.propTypes = {
       artist: PropTypes.string,
     })),
   }),
+  handleAnswer: PropTypes.func.isRequired,
 };
 
 export default QuestionArtistScreen;

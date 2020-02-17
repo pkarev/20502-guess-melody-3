@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const QuestionGenreScreen = ({question: {genre, tracks}}) => (
+const QuestionGenreScreen = ({question: {genre, tracks}, handleAnswer}) => (
   <section className="game game--genre">
     <header className="game__header">
       <a className="game__back" href="#">
@@ -32,7 +32,7 @@ const QuestionGenreScreen = ({question: {genre, tracks}}) => (
 
     <section className="game__screen">
       <h2 className="game__title">Выберите {genre} треки</h2>
-      <form className="game__tracks">
+      <form className="game__tracks" onSubmit={handleAnswer}>
         {tracks.map((track) => (
           <div className="track" key={track.id}>
             <button className="track__button track__button--play" type="button"></button>
@@ -60,6 +60,7 @@ QuestionGenreScreen.propTypes = {
       genre: PropTypes.string,
     })),
   }),
+  handleAnswer: PropTypes.func.isRequired,
 };
 
 export default QuestionGenreScreen;

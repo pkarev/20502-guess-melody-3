@@ -5,30 +5,72 @@ import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
 
-const welcomeButtonHandler = () => {};
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      step: -1,
+    };
+
+    this._handleAnswer = this._handleAnswer.bind(this);
+  }
+
+  _handleAnswer(evt) {
+    evt.preventDefault();
+
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }));
+  }
+
+  _renderScreen() {
+    const {errorsCount, questions} = this.props;
+    const {step} = this.state;
+    const question = questions[step];
+
+    if (step === -1 || step >= questions.length) {
+      return (
+        <WelcomeScreen
+          errorsCount={errorsCount}
+          onWelcomeButtonClick={() => {
+            this.setState({
+              step: 0,
+            });
+          }}
+        />
+      );
+    }
+
+    if (question.artist) {
+      return (
+        <QuestionArtistScreen question={questions[1]} handleAnswer={this._handleAnswer}/>
+      );
+    }
+
+    if (question.genre) {
+      return (
+        <QuestionGenreScreen question={questions[0]} handleAnswer={this._handleAnswer}/>
+      );
+    }
+
+    return null;
   }
 
   render() {
-    const {errorsCount, questions} = this.props;
+    const {questions} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <WelcomeScreen
-              errorsCount={errorsCount}
-              onWelcomeButtonClick={welcomeButtonHandler}
-            />
+            {this._renderScreen()}
           </Route>
           <Route exact path="/genre">
-            <QuestionGenreScreen question={questions[0]}/>
+            <QuestionGenreScreen question={questions[0]} handleAnswer={this._handleAnswer}/>
           </Route>
           <Route exact path="/artist">
-            <QuestionArtistScreen question={questions[1]}/>
+            <QuestionArtistScreen question={questions[1]} handleAnswer={this._handleAnswer}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -53,7 +95,7 @@ App.propTypes = {
         artist: PropTypes.string,
       })),
     }),
-  ])),
+  ])).isRequired,
 };
 
 export default App;
