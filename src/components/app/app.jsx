@@ -16,9 +16,7 @@ class App extends PureComponent {
     this._handleAnswer = this._handleAnswer.bind(this);
   }
 
-  _handleAnswer(evt) {
-    evt.preventDefault();
-
+  _handleAnswer() {
     this.setState((prevState) => ({
       step: prevState.step + 1,
     }));

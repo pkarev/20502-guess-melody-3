@@ -86,10 +86,73 @@ exports[`Render QuestionGenreScreen 1`] = `
         >
           <input
             className="game__input visually-hidden"
+            id="answer-0"
+            name="answer"
+            onChange={[Function]}
+            type="checkbox"
+            value={false}
+          />
+          <label
+            className="game__check"
+            htmlFor="answer-0"
+          >
+            Отметить
+          </label>
+        </div>
+      </div>
+      <div
+        className="track"
+      >
+        <button
+          className="track__button track__button--play"
+          type="button"
+        />
+        <div
+          className="track__status"
+        >
+          <audio />
+        </div>
+        <div
+          className="game__answer"
+        >
+          <input
+            className="game__input visually-hidden"
+            id="answer-1"
+            name="answer"
+            onChange={[Function]}
+            type="checkbox"
+            value={false}
+          />
+          <label
+            className="game__check"
+            htmlFor="answer-1"
+          >
+            Отметить
+          </label>
+        </div>
+      </div>
+      <div
+        className="track"
+      >
+        <button
+          className="track__button track__button--play"
+          type="button"
+        />
+        <div
+          className="track__status"
+        >
+          <audio />
+        </div>
+        <div
+          className="game__answer"
+        >
+          <input
+            className="game__input visually-hidden"
             id="answer-2"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value={false}
           />
           <label
             className="game__check"
@@ -116,74 +179,15 @@ exports[`Render QuestionGenreScreen 1`] = `
         >
           <input
             className="game__input visually-hidden"
-            id="answer-2"
+            id="answer-3"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value={false}
           />
           <label
             className="game__check"
-            htmlFor="answer-2"
-          >
-            Отметить
-          </label>
-        </div>
-      </div>
-      <div
-        className="track"
-      >
-        <button
-          className="track__button track__button--play"
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-        <div
-          className="game__answer"
-        >
-          <input
-            className="game__input visually-hidden"
-            id="answer-2"
-            name="answer"
-            type="checkbox"
-            value="answer-1"
-          />
-          <label
-            className="game__check"
-            htmlFor="answer-2"
-          >
-            Отметить
-          </label>
-        </div>
-      </div>
-      <div
-        className="track"
-      >
-        <button
-          className="track__button track__button--play"
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-        <div
-          className="game__answer"
-        >
-          <input
-            className="game__input visually-hidden"
-            id="answer-2"
-            name="answer"
-            type="checkbox"
-            value="answer-1"
-          />
-          <label
-            className="game__check"
-            htmlFor="answer-2"
+            htmlFor="answer-3"
           >
             Отметить
           </label>
