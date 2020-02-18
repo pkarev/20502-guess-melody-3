@@ -11,7 +11,8 @@ class QuestionGenreScreen extends PureComponent {
   }
 
   render() {
-    const {question: {genre, tracks}, handleAnswer} = this.props;
+    const {question, handleAnswer} = this.props;
+    const {genre, tracks} = question;
     const {answers} = this.state;
 
     return (
@@ -47,7 +48,7 @@ class QuestionGenreScreen extends PureComponent {
           <h2 className="game__title">Выберите {genre} треки</h2>
           <form className="game__tracks" onSubmit={(evt) => {
             evt.preventDefault();
-            handleAnswer(this.props.question, this.state.answers);
+            handleAnswer(question, this.state.answers);
           }}>
             {tracks.map((track, index) => (
               <div className="track" key={track.id}>
@@ -57,7 +58,7 @@ class QuestionGenreScreen extends PureComponent {
                 </div>
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer"
-                    value={this.state.answers[index]}
+                    value={`answer-${index}`}
                     id={`answer-${index}`}
                     onChange={(evt) => {
                       const value = evt.target.checked;
