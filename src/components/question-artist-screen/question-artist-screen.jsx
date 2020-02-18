@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const QuestionArtistScreen = ({question: {options}, handleAnswer}) => (
+const QuestionArtistScreen = ({question: {artist, options}, handleAnswer}) => (
   <section className="game game--artist">
     <header className="game__header">
       <a className="game__back" href="#">
@@ -42,10 +42,19 @@ const QuestionArtistScreen = ({question: {options}, handleAnswer}) => (
       </div>
 
       <form className="game__artist">
-        {options.map((option) => (
-          <div className="artist" key={option.id} onClick={handleAnswer}>
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1"/>
-            <label className="artist__name" htmlFor="answer-1">
+        {options.map((option, index) => (
+          <div className="artist" key={option.artist}>
+            <input className="artist__input visually-hidden"
+              type="radio"
+              name="answer"
+              value={`answer-${index}`}
+              id={`answer-${index}`}
+              onChange={(evt) => {
+                evt.preventDefault();
+                handleAnswer(artist, option);
+              }}
+            />
+            <label className="artist__name" htmlFor={`answer-${index}`}>
               <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
               {option.name}
             </label>
@@ -60,7 +69,6 @@ QuestionArtistScreen.propTypes = {
   question: PropTypes.shape({
     artist: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
       artist: PropTypes.string,
     })),
   }),
