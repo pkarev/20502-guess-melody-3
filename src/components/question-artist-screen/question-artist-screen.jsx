@@ -12,7 +12,7 @@ class QuestionArtistScreen extends PureComponent {
   }
 
   render() {
-    const {question: {artist, options, src}, handleAnswer} = this.props;
+    const {question: {artist, options, src}, onAnswer} = this.props;
     const isPlaying = this.state.isPlaying;
 
     return (
@@ -64,7 +64,7 @@ class QuestionArtistScreen extends PureComponent {
                   id={`answer-${index}`}
                   onChange={(evt) => {
                     evt.preventDefault();
-                    handleAnswer(artist, option);
+                    onAnswer(artist, option);
                   }}
                 />
                 <label className="artist__name" htmlFor={`answer-${index}`}>
@@ -88,7 +88,7 @@ QuestionArtistScreen.propTypes = {
       artist: PropTypes.string.isRequired,
     })),
   }),
-  handleAnswer: PropTypes.func.isRequired,
+  onAnswer: PropTypes.func.isRequired,
 };
 
 export default QuestionArtistScreen;

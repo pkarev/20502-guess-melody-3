@@ -32,7 +32,7 @@ it(`Render QuestionGenreScreen`, () => {
   const tree = renderer
     .create(<QuestionGenreScreen
       question={questionGenre}
-      handleAnswer={() => {}}
+      onAnswer={() => {}}
     />, {
       createNodeMock: () => {
         return {};

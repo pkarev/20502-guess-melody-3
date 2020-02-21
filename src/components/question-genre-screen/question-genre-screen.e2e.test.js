@@ -34,12 +34,12 @@ const questionGenre = {
 };
 
 it(`When user answers the question, form is not submitted`, () => {
-  const handleAnswer = jest.fn();
+  const onAnswer = jest.fn();
 
   const questionGenreScreen = shallow(
       <QuestionGenreScreen
         question={questionGenre}
-        handleAnswer={handleAnswer}
+        onAnswer={onAnswer}
       />
   );
 
@@ -50,17 +50,17 @@ it(`When user answers the question, form is not submitted`, () => {
     preventDefault: formSendPrevention,
   });
 
-  expect(handleAnswer.mock.calls.length).toBe(1);
+  expect(onAnswer.mock.calls.length).toBe(1);
   expect(formSendPrevention.mock.calls.length).toBe(1);
 });
 
-it(`When user answers the question, "handleAnswer" callback gets current question and user answers as arguments`, () => {
-  const handleAnswer = jest.fn();
+it(`When user answers the question, "onAnswer" callback gets current question and user answers as arguments`, () => {
+  const onAnswer = jest.fn();
 
   const questionGenreScreen = shallow(
       <QuestionGenreScreen
         question={questionGenre}
-        handleAnswer={handleAnswer}
+        onAnswer={onAnswer}
       />
   );
 
@@ -70,6 +70,6 @@ it(`When user answers the question, "handleAnswer" callback gets current questio
   thirdCheckbox.simulate(`change`, {target: {checked: true}});
   form.simulate(`submit`, {preventDefault: () => {}});
 
-  expect(handleAnswer.mock.calls[0][0]).toMatchObject(questionGenre);
-  expect(handleAnswer.mock.calls[0][1]).toMatchObject([false, false, true, false]);
+  expect(onAnswer.mock.calls[0][0]).toMatchObject(questionGenre);
+  expect(onAnswer.mock.calls[0][1]).toMatchObject([false, false, true, false]);
 });

@@ -13,7 +13,7 @@ class QuestionGenreScreen extends PureComponent {
   }
 
   render() {
-    const {question, handleAnswer} = this.props;
+    const {question, onAnswer} = this.props;
     const {genre, tracks} = question;
     const {answers, activePlayer} = this.state;
 
@@ -50,7 +50,7 @@ class QuestionGenreScreen extends PureComponent {
           <h2 className="game__title">Выберите {genre} треки</h2>
           <form className="game__tracks" onSubmit={(evt) => {
             evt.preventDefault();
-            handleAnswer(question, this.state.answers);
+            onAnswer(question, this.state.answers);
           }}>
             {tracks.map((track, index) => (
               <div className="track" key={track.id}>
@@ -99,7 +99,7 @@ QuestionGenreScreen.propTypes = {
       src: PropTypes.string,
     })),
   }),
-  handleAnswer: PropTypes.func.isRequired,
+  onAnswer: PropTypes.func.isRequired,
 };
 
 export default QuestionGenreScreen;

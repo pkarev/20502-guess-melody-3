@@ -25,7 +25,7 @@ it(`Render QuestionArtistScreen`, () => {
   const tree = renderer
     .create(<QuestionArtistScreen
       question={questionArtist}
-      handleAnswer={() => {}}
+      onAnswer={() => {}}
     />, {
       createNodeMock: () => {
         return {};

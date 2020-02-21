@@ -42,13 +42,13 @@ class App extends PureComponent {
 
     if (question.artist) {
       return (
-        <QuestionArtistScreen question={questions[1]} handleAnswer={this._handleAnswer}/>
+        <QuestionArtistScreen question={questions[1]} onAnswer={this._handleAnswer}/>
       );
     }
 
     if (question.genre) {
       return (
-        <QuestionGenreScreen question={questions[0]} handleAnswer={this._handleAnswer}/>
+        <QuestionGenreScreen question={questions[0]} onAnswer={this._handleAnswer}/>
       );
     }
 
@@ -65,10 +65,10 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/dev-genre">
-            <QuestionGenreScreen question={questions[0]} handleAnswer={this._handleAnswer}/>
+            <QuestionGenreScreen question={questions[0]} onAnswer={this._handleAnswer}/>
           </Route>
           <Route exact path="/dev-artist">
-            <QuestionArtistScreen question={questions[1]} handleAnswer={this._handleAnswer}/>
+            <QuestionArtistScreen question={questions[1]} onAnswer={this._handleAnswer}/>
           </Route>
         </Switch>
       </BrowserRouter>
