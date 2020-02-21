@@ -11,20 +11,24 @@ const questionGenre = {
   genre: `metall`,
   tracks: [
     {
-      genre: `metall`,
       id: 0,
+      genre: `metall`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `rap`,
       id: 1,
+      genre: `rap`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `rock`,
       id: 2,
+      genre: `rock`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `jazz`,
       id: 3,
+      genre: `jazz`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
   ]
 };

@@ -4,7 +4,6 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
-import AudioPlayer from '../audio-player/audio-player.jsx';
 
 class App extends PureComponent {
   constructor(props) {
@@ -70,9 +69,6 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-artist">
             <QuestionArtistScreen question={questions[1]} handleAnswer={this._handleAnswer}/>
-          </Route>
-          <Route exact path="/dev-player">
-            <AudioPlayer src={`${questions[1][`src`]}`}/>
           </Route>
         </Switch>
       </BrowserRouter>

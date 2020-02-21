@@ -9,6 +9,7 @@ Enzyme.configure({
 
 const questionArtist = {
   artist: `Пелагея`,
+  src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
   options: [
     {
       artist: `Пелагея`,

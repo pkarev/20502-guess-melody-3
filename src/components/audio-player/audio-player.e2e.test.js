@@ -18,18 +18,21 @@ it(`AudioPlayer should on button click change button class from play to pause an
   const audioPlayer = mount(<AudioPlayer
     src={audio.src}
     isPlaying={false}
+    onPlayerClick={() => {}}
   />);
 
   let playButton = audioPlayer.find(`.track__button`);
   expect(playButton.hasClass(`track__button--play`)).toBe(true);
 
   playButton.simulate(`click`);
+  audioPlayer.setState({isPlaying: true});
   audioPlayer.update();
 
   playButton = audioPlayer.find(`.track__button`);
   expect(playButton.hasClass(`track__button--pause`)).toBe(true);
 
   playButton.simulate(`click`);
+  audioPlayer.setState({isPlaying: false});
   audioPlayer.update();
 
   playButton = audioPlayer.find(`.track__button`);
