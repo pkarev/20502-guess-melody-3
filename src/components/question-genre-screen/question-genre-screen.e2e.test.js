@@ -1,11 +1,14 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import QuestionGenreScreen from './question-genre-screen';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
+
+HTMLMediaElement.prototype.play = () => {};
+HTMLMediaElement.prototype.pause = () => {};
 
 const questionGenre = {
   genre: `metall`,
@@ -36,7 +39,7 @@ const questionGenre = {
 it(`When user answers the question, form is not submitted`, () => {
   const onAnswer = jest.fn();
 
-  const questionGenreScreen = shallow(
+  const questionGenreScreen = mount(
       <QuestionGenreScreen
         question={questionGenre}
         onAnswer={onAnswer}
@@ -57,7 +60,7 @@ it(`When user answers the question, form is not submitted`, () => {
 it(`When user answers the question, "onAnswer" callback gets current question and user answers as arguments`, () => {
   const onAnswer = jest.fn();
 
-  const questionGenreScreen = shallow(
+  const questionGenreScreen = mount(
       <QuestionGenreScreen
         question={questionGenre}
         onAnswer={onAnswer}

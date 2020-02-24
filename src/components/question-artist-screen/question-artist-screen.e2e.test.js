@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import QuestionArtistScreen from './question-artist-screen';
 
@@ -29,7 +29,7 @@ const questionArtist = {
 it(`When user answers the question, "handleAnswer" callback gets current question's artist and user answer as arguments`, () => {
   const onAnswer = jest.fn();
 
-  const questionArtistScreen = shallow(<QuestionArtistScreen question={questionArtist} onAnswer={onAnswer}/>);
+  const questionArtistScreen = mount(<QuestionArtistScreen question={questionArtist} onAnswer={onAnswer}/>);
   const answerRadio = questionArtistScreen.find(`.artist__input`);
 
   answerRadio.at(0).simulate(`change`, {preventDefault: () => {}});

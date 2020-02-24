@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import AudioPlayer from '../audio-player/audio-player.jsx';
+import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
 
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
@@ -8,14 +8,13 @@ class QuestionGenreScreen extends PureComponent {
 
     this.state = {
       answers: [false, false, false, false],
-      activePlayer: -1,
     };
   }
 
   render() {
-    const {question, onAnswer} = this.props;
+    const {question, onAnswer, renderPlayer} = this.props;
     const {genre, tracks} = question;
-    const {answers, activePlayer} = this.state;
+    const {answers} = this.state;
 
     return (
       <section className="game game--genre">
@@ -54,13 +53,7 @@ class QuestionGenreScreen extends PureComponent {
           }}>
             {tracks.map((track, index) => (
               <div className="track" key={track.id}>
-                <AudioPlayer
-                  isPlaying={activePlayer === index}
-                  src={track.src}
-                  onPlayerClick={() => {
-                    this.setState({activePlayer: activePlayer === index ? -1 : index});
-                  }}
-                />
+                {renderPlayer(track.src, index)}
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer"
                     value={`answer-${index}`}
@@ -100,6 +93,7 @@ QuestionGenreScreen.propTypes = {
     })),
   }),
   onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
-export default QuestionGenreScreen;
+export default withAudioPlayer(QuestionGenreScreen);
