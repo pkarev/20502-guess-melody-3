@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import QuestionGenreScreen from './question-genre-screen';
 
@@ -7,35 +7,42 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+HTMLMediaElement.prototype.play = () => {};
+HTMLMediaElement.prototype.pause = () => {};
+
 const questionGenre = {
   genre: `metall`,
   tracks: [
     {
-      genre: `metall`,
       id: 0,
+      genre: `metall`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `rap`,
       id: 1,
+      genre: `rap`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `rock`,
       id: 2,
+      genre: `rock`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     {
-      genre: `jazz`,
       id: 3,
+      genre: `jazz`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
   ]
 };
 
 it(`When user answers the question, form is not submitted`, () => {
-  const handleAnswer = jest.fn();
+  const onAnswer = jest.fn();
 
-  const questionGenreScreen = shallow(
+  const questionGenreScreen = mount(
       <QuestionGenreScreen
         question={questionGenre}
-        handleAnswer={handleAnswer}
+        onAnswer={onAnswer}
       />
   );
 
@@ -46,17 +53,17 @@ it(`When user answers the question, form is not submitted`, () => {
     preventDefault: formSendPrevention,
   });
 
-  expect(handleAnswer.mock.calls.length).toBe(1);
+  expect(onAnswer.mock.calls.length).toBe(1);
   expect(formSendPrevention.mock.calls.length).toBe(1);
 });
 
-it(`When user answers the question, "handleAnswer" callback gets current question and user answers as arguments`, () => {
-  const handleAnswer = jest.fn();
+it(`When user answers the question, "onAnswer" callback gets current question and user answers as arguments`, () => {
+  const onAnswer = jest.fn();
 
-  const questionGenreScreen = shallow(
+  const questionGenreScreen = mount(
       <QuestionGenreScreen
         question={questionGenre}
-        handleAnswer={handleAnswer}
+        onAnswer={onAnswer}
       />
   );
 
@@ -66,6 +73,6 @@ it(`When user answers the question, "handleAnswer" callback gets current questio
   thirdCheckbox.simulate(`change`, {target: {checked: true}});
   form.simulate(`submit`, {preventDefault: () => {}});
 
-  expect(handleAnswer.mock.calls[0][0]).toMatchObject(questionGenre);
-  expect(handleAnswer.mock.calls[0][1]).toMatchObject([false, false, true, false]);
+  expect(onAnswer.mock.calls[0][0]).toMatchObject(questionGenre);
+  expect(onAnswer.mock.calls[0][1]).toMatchObject([false, false, true, false]);
 });

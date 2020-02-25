@@ -11,37 +11,42 @@ const questions = [
     genre: `metall`,
     tracks: [
       {
-        genre: `metall`,
         id: 0,
+        genre: `metall`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       },
       {
-        genre: `rap`,
         id: 1,
+        genre: `rap`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       },
       {
-        genre: `rock`,
         id: 2,
+        genre: `rock`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       },
       {
-        genre: `jazz`,
         id: 3,
+        genre: `jazz`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       },
     ]
   },
   {
     artist: `Пелагея`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     options: [
       {
-        artist: `Пелагея`,
         id: 0,
+        artist: `Пелагея`,
       },
       {
-        artist: `Меладзе`,
         id: 1,
+        artist: `Меладзе`,
       },
       {
-        artist: `Шнуров`,
         id: 2,
+        artist: `Шнуров`,
       },
     ]
   },

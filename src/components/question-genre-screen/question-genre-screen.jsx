@@ -1,17 +1,18 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
 
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      answers: [false, false, false, false]
+      answers: [false, false, false, false],
     };
   }
 
   render() {
-    const {question, handleAnswer} = this.props;
+    const {question, onAnswer, renderPlayer} = this.props;
     const {genre, tracks} = question;
     const {answers} = this.state;
 
@@ -48,14 +49,11 @@ class QuestionGenreScreen extends PureComponent {
           <h2 className="game__title">Выберите {genre} треки</h2>
           <form className="game__tracks" onSubmit={(evt) => {
             evt.preventDefault();
-            handleAnswer(question, this.state.answers);
+            onAnswer(question, this.state.answers);
           }}>
             {tracks.map((track, index) => (
               <div className="track" key={track.id}>
-                <button className="track__button track__button--play" type="button"></button>
-                <div className="track__status">
-                  <audio></audio>
-                </div>
+                {renderPlayer(track.src, index)}
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer"
                     value={`answer-${index}`}
@@ -91,9 +89,11 @@ QuestionGenreScreen.propTypes = {
     tracks: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       genre: PropTypes.string,
+      src: PropTypes.string,
     })),
   }),
-  handleAnswer: PropTypes.func.isRequired,
+  onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
-export default QuestionGenreScreen;
+export default withAudioPlayer(QuestionGenreScreen);
