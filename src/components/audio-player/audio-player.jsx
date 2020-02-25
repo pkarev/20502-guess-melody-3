@@ -47,7 +47,7 @@ class AudioPlayer extends PureComponent {
           type="button"
           disabled={isLoading}
           onClick={() => {
-            this.setState({isPlaying: !this.state.isPlaying});
+            this.setState({isPlaying: !isPlaying});
             onPlayerClick();
           }}
         />

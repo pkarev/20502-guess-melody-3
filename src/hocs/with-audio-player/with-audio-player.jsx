@@ -31,8 +31,6 @@ const withAudioPlayer = (Component) => {
     }
   }
 
-  WithAudioPlayer.propTypes = {};
-
   return WithAudioPlayer;
 };
 
