@@ -9,12 +9,6 @@ import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.
 import {ActionCreator} from '../../reducer.js';
 
 class App extends PureComponent {
-  _handleAnswer() {
-    this.setState((prevState) => ({
-      step: prevState.step + 1,
-    }));
-  }
-
   _renderScreen() {
     const {
       errorsCount,
@@ -101,8 +95,9 @@ const mapDispatchToProps = (dispatch) => ({
   onWelcomeButtonClick() {
     dispatch(ActionCreator.incrementStep());
   },
-  onAnswer() {
+  onAnswer(question, answer) {
     dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(question, answer));
   }
 });
 

@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import {App} from './app.jsx';
+
+const mockStore = configureStore([]);
 
 const Settings = {
   ERRORS_COUNT: 3,
@@ -54,45 +58,68 @@ const questions = [
 
 describe(`Render App`, () => {
   it(`Render WelcomeScreen`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
+
     const tree = renderer
-      .create(<App
-        errorsCount={Settings.ERRORS_COUNT}
-        questions={questions}
-        step={-1}
-        onAnswer={() => {}}
-        onWelcomeButtonClick={() => {}}/>)
+      .create(
+          <Provider store={store}>
+            <App
+              errorsCount={Settings.ERRORS_COUNT}
+              questions={questions}
+              step={-1}
+              onAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+            />
+          </Provider>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`Render QuestionGenreScreen`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
+
     const tree = renderer
-      .create(<App
-        errorsCount={Settings.ERRORS_COUNT}
-        questions={questions}
-        step={0}
-        onAnswer={() => {}}
-        onWelcomeButtonClick={() => {}}
-      />, {
-        createNodeMock: () => ({}),
-      })
+      .create(
+          <Provider store={store}>
+            <App
+              errorsCount={Settings.ERRORS_COUNT}
+              questions={questions}
+              step={0}
+              onAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+            />
+          </Provider>, {
+            createNodeMock: () => ({}),
+          })
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`Render QuestionArtistScreen`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
+
     const tree = renderer
-    .create(<App
-      errorsCount={Settings.ERRORS_COUNT}
-      questions={questions}
-      step={0}
-      onAnswer={() => {}}
-      onWelcomeButtonClick={() => {}}
-    />, {
-      createNodeMock: () => ({}),
-    })
+    .create(
+        <Provider store={store}>
+          <App
+            errorsCount={Settings.ERRORS_COUNT}
+            questions={questions}
+            step={0}
+            onAnswer={() => {}}
+            onWelcomeButtonClick={() => {}}
+          />
+        </Provider>, {
+          createNodeMock: () => ({}),
+        })
     .toJSON();
 
     expect(tree).toMatchSnapshot();

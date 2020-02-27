@@ -25,10 +25,36 @@ const reducer = (state = initialState, action) => {
 };
 
 const ActionCreator = {
-  incrementStep: (value) => ({
+  incrementStep: () => ({
     type: ActionType.INCREMENT_STEP,
-    payload: value ? value : 1,
-  })
+    payload: 1,
+  }),
+  incrementMistakes: (question, answer) => {
+    let answerIsCorrect = false;
+
+    if (question.genre) {
+      answerIsCorrect = isQuestionGenreCorrect(question, answer);
+    }
+
+    if (question.artist) {
+      answerIsCorrect = isQuestionArtistCorrect(question, answer);
+    }
+
+    return {
+      type: ActionType.INCREMENT_MISTAKES,
+      payload: answerIsCorrect ? 0 : 1,
+    };
+  },
+};
+
+const isQuestionArtistCorrect = (question, answer) => {
+  return answer === question.artist;
+};
+
+const isQuestionGenreCorrect = (question, answer) => {
+  return answer.every((item, index) => {
+    return item === (question.tracks[index].genre === question.genre);
+  });
 };
 
 export {reducer, ActionType, ActionCreator};
