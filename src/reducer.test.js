@@ -1,4 +1,5 @@
 import {reducer, ActionType} from './reducer.js';
+import {ActionCreator} from './reducer';
 
 const initialState = {
   mistakes: 0,
@@ -45,5 +46,19 @@ it(`Reducer should increment mistakes by given value`, () => {
   })).toEqual({
     mistakes: 0,
     step: -1,
+  });
+});
+
+describe(`Action creator work correctly`, () => {
+  it(`Action creeator for increment step returns correct action`, () => {
+    expect(ActionCreator.incrementStep()).toEqual({
+      type: ActionType.INCREMENT_STEP,
+      payload: 1,
+    });
+
+    expect(ActionCreator.incrementStep(2)).toEqual({
+      type: ActionType.INCREMENT_STEP,
+      payload: 2,
+    });
   });
 });

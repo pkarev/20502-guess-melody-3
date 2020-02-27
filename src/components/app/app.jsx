@@ -1,21 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
+import {ActionCreator} from '../../reducer.js';
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      step: -1,
-    };
-
-    this._handleAnswer = this._handleAnswer.bind(this);
-  }
-
   _handleAnswer() {
     this.setState((prevState) => ({
       step: prevState.step + 1,
@@ -23,32 +16,33 @@ class App extends PureComponent {
   }
 
   _renderScreen() {
-    const {errorsCount, questions} = this.props;
-    const {step} = this.state;
+    const {
+      errorsCount,
+      questions,
+      step,
+      onWelcomeButtonClick,
+      onAnswer
+    } = this.props;
     const question = questions[step];
 
     if (step === -1 || step >= questions.length) {
       return (
         <WelcomeScreen
           errorsCount={errorsCount}
-          onWelcomeButtonClick={() => {
-            this.setState({
-              step: 0,
-            });
-          }}
+          onWelcomeButtonClick={onWelcomeButtonClick}
         />
       );
     }
 
     if (question.artist) {
       return (
-        <QuestionArtistScreen question={questions[1]} onAnswer={this._handleAnswer}/>
+        <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
       );
     }
 
     if (question.genre) {
       return (
-        <QuestionGenreScreen question={questions[0]} onAnswer={this._handleAnswer}/>
+        <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
       );
     }
 
@@ -56,7 +50,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
+    const {questions, onAnswer} = this.props;
 
     return (
       <BrowserRouter>
@@ -65,10 +59,10 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/dev-genre">
-            <QuestionGenreScreen question={questions[0]} onAnswer={this._handleAnswer}/>
+            <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
           </Route>
           <Route exact path="/dev-artist">
-            <QuestionArtistScreen question={questions[1]} onAnswer={this._handleAnswer}/>
+            <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -94,6 +88,23 @@ App.propTypes = {
       })),
     }),
   ])).isRequired,
+  step: PropTypes.number.isRequired,
+  onWelcomeButtonClick: PropTypes.func.isRequired,
+  onAnswer: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  step: state.step
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeButtonClick() {
+    dispatch(ActionCreator.incrementStep());
+  },
+  onAnswer() {
+    dispatch(ActionCreator.incrementStep());
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

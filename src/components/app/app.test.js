@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import {App} from './app.jsx';
 
 const Settings = {
   ERRORS_COUNT: 3,
@@ -52,10 +52,50 @@ const questions = [
   },
 ];
 
-it(`Render App`, () => {
-  const tree = renderer
-    .create(<App errorsCount={Settings.ERRORS_COUNT} questions={questions}/>)
+describe(`Render App`, () => {
+  it(`Render WelcomeScreen`, () => {
+    const tree = renderer
+      .create(<App
+        errorsCount={Settings.ERRORS_COUNT}
+        questions={questions}
+        step={-1}
+        onAnswer={() => {}}
+        onWelcomeButtonClick={() => {}}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render QuestionGenreScreen`, () => {
+    const tree = renderer
+      .create(<App
+        errorsCount={Settings.ERRORS_COUNT}
+        questions={questions}
+        step={0}
+        onAnswer={() => {}}
+        onWelcomeButtonClick={() => {}}
+      />, {
+        createNodeMock: () => ({}),
+      })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render QuestionArtistScreen`, () => {
+    const tree = renderer
+    .create(<App
+      errorsCount={Settings.ERRORS_COUNT}
+      questions={questions}
+      step={0}
+      onAnswer={() => {}}
+      onWelcomeButtonClick={() => {}}
+    />, {
+      createNodeMock: () => ({}),
+    })
     .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });
+
