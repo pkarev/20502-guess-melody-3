@@ -1,11 +1,6 @@
 import {reducer, ActionType} from './reducer.js';
 import {ActionCreator} from './reducer';
 
-const initialState = {
-  mistakes: 0,
-  step: -1,
-};
-
 const questionGenre = {
   genre: `metall`,
   tracks: [
@@ -31,7 +26,6 @@ const questionGenre = {
     },
   ]
 };
-
 const questionArtist = {
   artist: `Пелагея`,
   src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
@@ -50,17 +44,25 @@ const questionArtist = {
     },
   ]
 };
-
+const questions = [questionGenre, questionArtist];
 const correctGenreAnswers = [true, false, false, false];
 const inCorrectGenreAnswers = [false, false, false, false];
 const correctArtistAnswer = `Пелагея`;
 const incorrectArtistAnswer = `Шнур`;
 
+const initialState = {
+  mistakes: 0,
+  step: -1,
+  maxMistakes: 3,
+  questions,
+};
 
 it(`Reducer without params should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
     mistakes: 0,
     step: -1,
+    maxMistakes: 3,
+    questions,
   });
 });
 
@@ -71,6 +73,8 @@ it(`Reducer should increment step by given value`, () => {
   })).toEqual({
     mistakes: 0,
     step: 1,
+    maxMistakes: 3,
+    questions,
   });
 
   expect(reducer(initialState, {
@@ -79,6 +83,8 @@ it(`Reducer should increment step by given value`, () => {
   })).toEqual({
     mistakes: 0,
     step: -1,
+    maxMistakes: 3,
+    questions,
   });
 });
 
@@ -89,6 +95,8 @@ it(`Reducer should increment mistakes by given value`, () => {
   })).toEqual({
     mistakes: 1,
     step: -1,
+    maxMistakes: 3,
+    questions,
   });
 
   expect(reducer(initialState, {
@@ -97,6 +105,8 @@ it(`Reducer should increment mistakes by given value`, () => {
   })).toEqual({
     mistakes: 0,
     step: -1,
+    maxMistakes: 3,
+    questions,
   });
 });
 

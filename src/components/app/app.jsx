@@ -14,7 +14,7 @@ import {ActionCreator} from '../../reducer.js';
 class App extends PureComponent {
   _renderScreen() {
     const {
-      errorsCount,
+      maxMistakes,
       questions,
       step,
       onWelcomeButtonClick,
@@ -25,7 +25,7 @@ class App extends PureComponent {
     if (step === -1 || step >= questions.length) {
       return (
         <WelcomeScreen
-          errorsCount={errorsCount}
+          maxMistakes={maxMistakes}
           onWelcomeButtonClick={onWelcomeButtonClick}
         />
       );
@@ -76,7 +76,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
+  maxMistakes: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.shape({
       genre: PropTypes.string,
@@ -100,6 +100,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   step: state.step,
+  maxMistakes: state.maxMistakes,
+  questions: state.questions,
 });
 
 const mapDispatchToProps = (dispatch) => ({

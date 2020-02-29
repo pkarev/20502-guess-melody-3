@@ -1,6 +1,10 @@
+import questions from './mocks/questions.js';
+
 const initialState = {
   mistakes: 0,
   step: -1,
+  maxMistakes: 3,
+  questions,
 };
 
 const ActionType = {

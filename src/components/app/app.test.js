@@ -6,10 +6,6 @@ import {App} from './app.jsx';
 
 const mockStore = configureStore([]);
 
-const Settings = {
-  ERRORS_COUNT: 3,
-};
-
 const questions = [
   {
     genre: `metall`,
@@ -66,7 +62,7 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
-              errorsCount={Settings.ERRORS_COUNT}
+              maxMistakes={3}
               questions={questions}
               step={-1}
               onAnswer={() => {}}
@@ -88,7 +84,7 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
-              errorsCount={Settings.ERRORS_COUNT}
+              maxMistakes={3}
               questions={questions}
               step={0}
               onAnswer={() => {}}
@@ -111,7 +107,7 @@ describe(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            errorsCount={Settings.ERRORS_COUNT}
+            maxMistakes={3}
             questions={questions}
             step={0}
             onAnswer={() => {}}

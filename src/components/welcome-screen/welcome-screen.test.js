@@ -9,7 +9,7 @@ const Settings = {
 it(`Render WelcomeScreen`, () => {
   const tree = renderer
     .create(<WelcomeScreen
-      errorsCount={Settings.ERRORS_COUNT}
+      maxMistakes={Settings.ERRORS_COUNT}
       onWelcomeButtonClick={() => {}}
     />)
     .toJSON();

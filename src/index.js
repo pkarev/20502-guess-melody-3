@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';
-import gameSettings from './mocks/game-settings.js';
-import questions from './mocks/questions.js';
 import {reducer} from './reducer.js';
 
 const store = createStore(
@@ -14,7 +12,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-      <App errorsCount={gameSettings.ERRORS_COUNT} questions={questions}/>,
+      <App/>,
     </Provider>,
     document.querySelector(`#root`)
 );
