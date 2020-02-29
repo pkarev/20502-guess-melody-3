@@ -59,7 +59,7 @@ const questions = [
 describe(`Render App`, () => {
   it(`Render WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 0,
+      mistakes: 3,
     });
 
     const tree = renderer
@@ -81,7 +81,7 @@ describe(`Render App`, () => {
 
   it(`Render QuestionGenreScreen`, () => {
     const store = mockStore({
-      mistakes: 0,
+      mistakes: 3,
     });
 
     const tree = renderer
@@ -104,7 +104,7 @@ describe(`Render App`, () => {
 
   it(`Render QuestionArtistScreen`, () => {
     const store = mockStore({
-      mistakes: 0,
+      mistakes: 3,
     });
 
     const tree = renderer

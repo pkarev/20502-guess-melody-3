@@ -99,7 +99,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step
+  step: state.step,
 });
 
 const mapDispatchToProps = (dispatch) => ({
