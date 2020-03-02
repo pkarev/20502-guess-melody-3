@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 
 class QuestionGenreScreen extends PureComponent {
   constructor(props) {
@@ -67,4 +67,4 @@ QuestionGenreScreen.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
 };
 
-export default withAudioPlayer(QuestionGenreScreen);
+export default withActivePlayer(QuestionGenreScreen);

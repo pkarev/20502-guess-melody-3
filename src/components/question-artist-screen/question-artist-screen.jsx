@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 
 const QuestionArtistScreen = (props) => {
   const {question: {artist, options, src}, onAnswer, renderPlayer} = props;
@@ -50,4 +50,4 @@ QuestionArtistScreen.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
 };
 
-export default withAudioPlayer(QuestionArtistScreen);
+export default withActivePlayer(QuestionArtistScreen);
