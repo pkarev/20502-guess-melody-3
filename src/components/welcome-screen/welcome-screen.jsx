@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const WelcomeScreen = ({errorsCount, onWelcomeButtonClick}) => (
+const WelcomeScreen = ({maxMistakes, onWelcomeButtonClick}) => (
   <section className="welcome">
     <div className="welcome__logo">
       <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
@@ -16,14 +16,14 @@ const WelcomeScreen = ({errorsCount, onWelcomeButtonClick}) => (
     <p className="welcome__text">Правила просты:</p>
     <ul className="welcome__rules-list">
       <li>Нужно ответить на все вопросы.</li>
-      <li>Можно допустить {errorsCount} ошибки.</li>
+      <li>Можно допустить {maxMistakes} ошибки.</li>
     </ul>
     <p className="welcome__text">Удачи!</p>
   </section>
 );
 
 WelcomeScreen.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
+  maxMistakes: PropTypes.number.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired
 };
 

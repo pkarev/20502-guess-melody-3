@@ -16,7 +16,7 @@ it(`Should call welcomeButton callback func`, () => {
 
   const welcomeScreen = shallow(
       <WelcomeScreen
-        errorsCount={Settings.ERRORS_COUNT}
+        maxMistakes={Settings.ERRORS_COUNT}
         onWelcomeButtonClick={onWelcomeButtonClick}
       />
   );
