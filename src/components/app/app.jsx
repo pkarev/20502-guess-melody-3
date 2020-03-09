@@ -7,9 +7,12 @@ import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GameScreen from '../game-screen/game-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
-
 import {GameType} from '../../consts.js';
 import {ActionCreator} from '../../reducer.js';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
+import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
+
+const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
 
 class App extends PureComponent {
   _renderScreen() {
@@ -42,7 +45,7 @@ class App extends PureComponent {
     if (question.genre) {
       return (
         <GameScreen type={GameType.GENRE}>
-          <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
+          <QuestionGenreScreenWrapped question={questions[0]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }
@@ -61,7 +64,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-genre">
             <GameScreen type={GameType.GENRE}>
-              <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
+              <QuestionGenreScreenWrapped question={questions[0]} onAnswer={onAnswer}/>
             </GameScreen>
           </Route>
           <Route exact path="/dev-artist">

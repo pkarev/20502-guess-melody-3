@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import QuestionGenreScreen from './question-genre-screen';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
+import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
+
+const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
 
 const questionGenre = {
   genre: `metall`,
@@ -30,7 +34,7 @@ const questionGenre = {
 
 it(`Render QuestionGenreScreen`, () => {
   const tree = renderer
-    .create(<QuestionGenreScreen
+    .create(<QuestionGenreScreenWrapped
       question={questionGenre}
       onAnswer={() => {}}
     />, {

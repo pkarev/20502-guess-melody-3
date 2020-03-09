@@ -1,7 +1,11 @@
 import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import QuestionGenreScreen from './question-genre-screen';
+import QuestionGenreScreen from './question-genre-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
+import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
+
+const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -40,7 +44,7 @@ it(`When user answers the question, form is not submitted`, () => {
   const onAnswer = jest.fn();
 
   const questionGenreScreen = mount(
-      <QuestionGenreScreen
+      <QuestionGenreScreenWrapped
         question={questionGenre}
         onAnswer={onAnswer}
       />
@@ -61,7 +65,7 @@ it(`When user answers the question, "onAnswer" callback gets current question an
   const onAnswer = jest.fn();
 
   const questionGenreScreen = mount(
-      <QuestionGenreScreen
+      <QuestionGenreScreenWrapped
         question={questionGenre}
         onAnswer={onAnswer}
       />
