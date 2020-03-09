@@ -1,42 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 
-const QuestionArtistScreen = (props) => {
-  const {question: {artist, options, src}, onAnswer, renderPlayer} = props;
-
-  return (
-    <section className="game__screen">
-      <h2 className="game__title">Кто исполняет эту песню?</h2>
-      <div className="game__track">
-        <div className="track">
-          {renderPlayer(src)}
-        </div>
+const QuestionArtistScreen = ({
+  question: {artist, options, src},
+  onAnswer,
+  renderPlayer
+}) => (
+  <section className="game__screen">
+    <h2 className="game__title">Кто исполняет эту песню?</h2>
+    <div className="game__track">
+      <div className="track">
+        {renderPlayer(src)}
       </div>
+    </div>
 
-      <form className="game__artist">
-        {options.map((option, index) => (
-          <div className="artist" key={option.artist}>
-            <input className="artist__input visually-hidden"
-              type="radio"
-              name="answer"
-              value={`answer-${index}`}
-              id={`answer-${index}`}
-              onChange={(evt) => {
-                evt.preventDefault();
-                onAnswer(artist, option);
-              }}
-            />
-            <label className="artist__name" htmlFor={`answer-${index}`}>
-              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-              {option.name}
-            </label>
-          </div>
-        ))}
-      </form>
-    </section>
-  );
-};
+    <form className="game__artist">
+      {options.map((option, index) => (
+        <div className="artist" key={option.artist}>
+          <input className="artist__input visually-hidden"
+            type="radio"
+            name="answer"
+            value={`answer-${index}`}
+            id={`answer-${index}`}
+            onChange={(evt) => {
+              evt.preventDefault();
+              onAnswer(artist, option);
+            }}
+          />
+          <label className="artist__name" htmlFor={`answer-${index}`}>
+            <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
+            {option.name}
+          </label>
+        </div>
+      ))}
+    </form>
+  </section>
+);
 
 QuestionArtistScreen.propTypes = {
   question: PropTypes.shape({
@@ -50,4 +49,4 @@ QuestionArtistScreen.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
 };
 
-export default withActivePlayer(QuestionArtistScreen);
+export default React.memo(QuestionArtistScreen);

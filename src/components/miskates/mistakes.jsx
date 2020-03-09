@@ -15,4 +15,4 @@ Mistakes.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default Mistakes;
+export default React.memo(Mistakes);

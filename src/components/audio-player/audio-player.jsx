@@ -26,4 +26,4 @@ AudioPlayer.propTypes = {
   ]),
 };
 
-export default AudioPlayer;
+export default React.memo(AudioPlayer);

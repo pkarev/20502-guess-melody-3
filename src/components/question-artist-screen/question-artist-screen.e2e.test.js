@@ -2,6 +2,9 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import QuestionArtistScreen from './question-artist-screen';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+
+const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -29,7 +32,7 @@ const questionArtist = {
 it(`When user answers the question, "handleAnswer" callback gets current question's artist and user answer as arguments`, () => {
   const onAnswer = jest.fn();
 
-  const questionArtistScreen = mount(<QuestionArtistScreen question={questionArtist} onAnswer={onAnswer}/>);
+  const questionArtistScreen = mount(<QuestionArtistScreenWrapped question={questionArtist} onAnswer={onAnswer}/>);
   const answerRadio = questionArtistScreen.find(`.artist__input`);
 
   answerRadio.at(0).simulate(`change`, {preventDefault: () => {}});

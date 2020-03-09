@@ -13,6 +13,7 @@ import withActivePlayer from '../../hocs/with-active-player/with-active-player.j
 import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
 
 const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
+const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 class App extends PureComponent {
   _renderScreen() {
@@ -37,7 +38,7 @@ class App extends PureComponent {
     if (question.artist) {
       return (
         <GameScreen type={GameType.ARTIST}>
-          <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
+          <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }
@@ -69,7 +70,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-artist">
             <GameScreen type={GameType.ARTIST}>
-              <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
+              <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
             </GameScreen>
           </Route>
         </Switch>

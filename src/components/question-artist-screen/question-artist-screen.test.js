@@ -1,6 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import QuestionArtistScreen from './question-artist-screen';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+
+const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 const questionArtist = {
   artist: `Пелагея`,
@@ -23,7 +26,7 @@ const questionArtist = {
 
 it(`Render QuestionArtistScreen`, () => {
   const tree = renderer
-    .create(<QuestionArtistScreen
+    .create(<QuestionArtistScreenWrapped
       question={questionArtist}
       onAnswer={() => {}}
     />, {
