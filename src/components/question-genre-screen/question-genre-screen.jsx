@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import GenreQuestionItem from '../question-genre-item/genre-question-item.jsx';
 
-const QuestionGenreScreen = ({question, onAnswer, renderPlayer, onAnswerOptionChange}) => {
+const QuestionGenreScreen = ({question, onAnswer, renderPlayer, onAnswerOptionChange, answers}) => {
   const {genre, tracks} = question;
 
   return (
@@ -12,19 +13,14 @@ const QuestionGenreScreen = ({question, onAnswer, renderPlayer, onAnswerOptionCh
         onAnswer(question);
       }}>
         {tracks.map((track, index) => (
-          <div className="track" key={track.id}>
-            {renderPlayer(track.src, index)}
-            <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer"
-                value={`answer-${index}`}
-                id={`answer-${index}`}
-                onChange={(evt) => {
-                  onAnswerOptionChange(evt.target.checked, index);
-                }}
-              />
-              <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
-            </div>
-          </div>
+          <GenreQuestionItem
+            track={tracks[index]}
+            id={index}
+            key={index}
+            renderPlayer={renderPlayer}
+            onAnswerOptionChange={onAnswerOptionChange}
+            answer={answers[index]}
+          />
         ))};
 
         <button className="game__submit button" type="submit">Ответить</button>
@@ -37,7 +33,6 @@ QuestionGenreScreen.propTypes = {
   question: PropTypes.shape({
     genre: PropTypes.string,
     tracks: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
       genre: PropTypes.string,
       src: PropTypes.string,
     })),
@@ -45,6 +40,7 @@ QuestionGenreScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   onAnswerOptionChange: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
+  answers: PropTypes.arrayOf(PropTypes.bool),
 };
 
 export default React.memo(QuestionGenreScreen);

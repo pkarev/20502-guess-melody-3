@@ -34,11 +34,14 @@ const withGenreAnswers = (Component) => {
     }
 
     render() {
+      const {answers} = this.state;
+
       return (
         <Component
           {...this.props}
           onAnswerOptionChange={this._handleAnswerOptionChange}
           onAnswer={this._handleAnswer}
+          answers={answers}
         />
       );
     }
