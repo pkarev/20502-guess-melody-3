@@ -38,6 +38,6 @@ it(`When user answers the question, "handleAnswer" callback gets current questio
   answerRadio.at(0).simulate(`change`, {preventDefault: () => {}});
 
   expect(onAnswer.mock.calls.length).toBe(1);
-  expect(onAnswer.mock.calls[0][0]).toBe(questionArtist.artist);
-  expect(onAnswer.mock.calls[0][1]).toMatchObject(questionArtist.options[0]);
+  expect(onAnswer.mock.calls[0][0]).toBe(questionArtist);
+  expect(onAnswer.mock.calls[0][1]).toBe(questionArtist.options[0].artist);
 });

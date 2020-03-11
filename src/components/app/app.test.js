@@ -62,11 +62,13 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
+              mistakes={0}
               maxMistakes={3}
-              questions={questions}
               step={-1}
+              questions={questions}
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
+              onPlayMoreClick={() => {}}
             />
           </Provider>
       )
@@ -84,11 +86,13 @@ describe(`Render App`, () => {
       .create(
           <Provider store={store}>
             <App
+              mistakes={0}
               maxMistakes={3}
-              questions={questions}
               step={0}
+              questions={questions}
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
+              onPlayMoreClick={() => {}}
             />
           </Provider>, {
             createNodeMock: () => ({}),
@@ -104,19 +108,21 @@ describe(`Render App`, () => {
     });
 
     const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            maxMistakes={3}
-            questions={questions}
-            step={0}
-            onAnswer={() => {}}
-            onWelcomeButtonClick={() => {}}
-          />
-        </Provider>, {
-          createNodeMock: () => ({}),
-        })
-    .toJSON();
+      .create(
+          <Provider store={store}>
+            <App
+              mistakes={0}
+              maxMistakes={3}
+              step={1}
+              questions={questions}
+              onAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              onPlayMoreClick={() => {}}
+            />
+          </Provider>, {
+            createNodeMock: () => ({}),
+          })
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

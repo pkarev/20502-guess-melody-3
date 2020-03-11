@@ -10,6 +10,7 @@ const initialState = {
 const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
+  RESET_GAME: `RESET_GAME`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,9 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         step: state.step + action.payload,
       });
+
+    case ActionType.RESET_GAME:
+      return Object.assign({}, initialState, {step: 0});
   }
 
   return state;
@@ -49,10 +53,13 @@ const ActionCreator = {
       payload: answerIsCorrect ? 0 : 1,
     };
   },
+  resetGame: () => ({
+    type: ActionType.RESET_GAME,
+  })
 };
 
 const isQuestionArtistCorrect = (question, answer) => {
-  return answer === question.artist;
+  return question.artist === answer;
 };
 
 const isQuestionGenreCorrect = (question, answer) => {
