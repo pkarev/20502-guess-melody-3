@@ -7,9 +7,15 @@ import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GameScreen from '../game-screen/game-screen.jsx';
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
-
+import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
+import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import {GameType} from '../../consts.js';
 import {ActionCreator} from '../../reducer.js';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
+import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
+
+const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
+const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 
 class App extends PureComponent {
   _renderScreen() {
@@ -18,11 +24,13 @@ class App extends PureComponent {
       questions,
       step,
       onWelcomeButtonClick,
-      onAnswer
+      onAnswer,
+      onPlayMoreClick,
+      mistakes
     } = this.props;
     const question = questions[step];
 
-    if (step === -1 || step >= questions.length) {
+    if (step === -1) {
       return (
         <WelcomeScreen
           maxMistakes={maxMistakes}
@@ -31,10 +39,22 @@ class App extends PureComponent {
       );
     }
 
+    if (mistakes === maxMistakes) {
+      return (
+        <GameOverScreen onPlayMoreClick={onPlayMoreClick}/>
+      );
+    }
+
+    if (step === questions.length) {
+      return (
+        <GameWinScreen wrongAnswers={mistakes} correctAnswers={step - mistakes} onPlayMoreClick={onPlayMoreClick}/>
+      );
+    }
+
     if (question.artist) {
       return (
         <GameScreen type={GameType.ARTIST}>
-          <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
+          <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }
@@ -42,7 +62,7 @@ class App extends PureComponent {
     if (question.genre) {
       return (
         <GameScreen type={GameType.GENRE}>
-          <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
+          <QuestionGenreScreenWrapped question={questions[0]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }
@@ -61,12 +81,12 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-genre">
             <GameScreen type={GameType.GENRE}>
-              <QuestionGenreScreen question={questions[0]} onAnswer={onAnswer}/>
+              <QuestionGenreScreenWrapped question={questions[0]} onAnswer={onAnswer}/>
             </GameScreen>
           </Route>
           <Route exact path="/dev-artist">
             <GameScreen type={GameType.ARTIST}>
-              <QuestionArtistScreen question={questions[1]} onAnswer={onAnswer}/>
+              <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
             </GameScreen>
           </Route>
         </Switch>
@@ -76,6 +96,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  mistakes: PropTypes.number.isRequired,
   maxMistakes: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.shape({
@@ -96,11 +117,13 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  onPlayMoreClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   step: state.step,
   maxMistakes: state.maxMistakes,
+  mistakes: state.mistakes,
   questions: state.questions,
 });
 
@@ -111,7 +134,10 @@ const mapDispatchToProps = (dispatch) => ({
   onAnswer(question, answer) {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(question, answer));
-  }
+  },
+  onPlayMoreClick() {
+    dispatch(ActionCreator.resetGame());
+  },
 });
 
 export {App};

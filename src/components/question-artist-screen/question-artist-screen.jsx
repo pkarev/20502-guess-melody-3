@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withAudioPlayer from '../../hocs/with-audio-player/with-audio-player.jsx';
 
-const QuestionArtistScreen = (props) => {
-  const {question: {artist, options, src}, onAnswer, renderPlayer} = props;
-
+const QuestionArtistScreen = ({
+  question,
+  onAnswer,
+  renderPlayer
+}) => {
+  const {options, src} = question;
   return (
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
@@ -24,7 +26,7 @@ const QuestionArtistScreen = (props) => {
               id={`answer-${index}`}
               onChange={(evt) => {
                 evt.preventDefault();
-                onAnswer(artist, option);
+                onAnswer(question, option.artist);
               }}
             />
             <label className="artist__name" htmlFor={`answer-${index}`}>
@@ -50,4 +52,4 @@ QuestionArtistScreen.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
 };
 
-export default withAudioPlayer(QuestionArtistScreen);
+export default React.memo(QuestionArtistScreen);

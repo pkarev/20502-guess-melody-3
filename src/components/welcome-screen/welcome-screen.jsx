@@ -27,4 +27,4 @@ WelcomeScreen.propTypes = {
   onWelcomeButtonClick: PropTypes.func.isRequired
 };
 
-export default WelcomeScreen;
+export default React.memo(WelcomeScreen);

@@ -110,6 +110,10 @@ it(`Reducer should increment mistakes by given value`, () => {
   });
 });
 
+it(`Reducer should reset game`, () => {
+  expect(reducer(initialState, ActionCreator.resetGame())).toEqual(Object.assign(initialState, {step: 0}));
+});
+
 describe(`Action creator work correctly`, () => {
   it(`Action creator for increment step returns correct action`, () => {
     expect(ActionCreator.incrementStep()).toEqual({

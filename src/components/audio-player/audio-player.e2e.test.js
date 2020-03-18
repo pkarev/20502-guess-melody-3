@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {mount} from 'enzyme';
+import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import AudioPlayer from './audio-player.jsx';
 
@@ -7,34 +7,18 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-HTMLMediaElement.prototype.play = () => {};
-HTMLMediaElement.prototype.pause = () => {};
-
-const audio = {
-  src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-};
-
-it(`AudioPlayer should on button click change button class from play to pause and vise versa`, () => {
-  const audioPlayer = mount(<AudioPlayer
-    src={audio.src}
+it(`AudioPlayer calls callback on button click`, () => {
+  const handleButtonClick = jest.fn();
+  const audioPlayer = shallow(<AudioPlayer
     isPlaying={false}
-    onPlayerClick={() => {}}
-  />);
+    isLoading={true}
+    onPlayerClick={handleButtonClick}
+  >
+    <audio/>
+  </AudioPlayer>);
 
-  let playButton = audioPlayer.find(`.track__button`);
-  expect(playButton.hasClass(`track__button--play`)).toBe(true);
-
+  const playButton = audioPlayer.find(`.track__button`);
   playButton.simulate(`click`);
-  audioPlayer.setState({isPlaying: true});
-  audioPlayer.update();
 
-  playButton = audioPlayer.find(`.track__button`);
-  expect(playButton.hasClass(`track__button--pause`)).toBe(true);
-
-  playButton.simulate(`click`);
-  audioPlayer.setState({isPlaying: false});
-  audioPlayer.update();
-
-  playButton = audioPlayer.find(`.track__button`);
-  expect(playButton.hasClass(`track__button--play`)).toBe(true);
+  expect(handleButtonClick).toBeCalledTimes(1);
 });
