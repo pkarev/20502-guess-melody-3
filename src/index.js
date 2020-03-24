@@ -4,8 +4,9 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './components/app/app.jsx';
-import {reducer, Operation} from './reducer.js';
 import {createAPI} from './api.js';
+import reducer from './reducer/reducer.js';
+import {Operation} from './reducer/data/data.js';
 
 const onUnauthorized = () => {};
 

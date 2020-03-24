@@ -2,14 +2,12 @@ const initialState = {
   mistakes: 0,
   step: -1,
   maxMistakes: 3,
-  questions: [],
 };
 
 const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
   RESET_GAME: `RESET_GAME`,
-  LOAD_QUESTIONS: `LOAD_QUESTIONS`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,11 +24,6 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.RESET_GAME:
       return Object.assign({}, initialState, {step: 0});
-
-    case ActionType.LOAD_QUESTIONS:
-      return Object.assign({}, state, {
-        questions: action.payload
-      });
   }
 
   return state;
@@ -60,19 +53,6 @@ const ActionCreator = {
   resetGame: () => ({
     type: ActionType.RESET_GAME,
   }),
-  loadQuestions: (questions) => ({
-    type: ActionType.LOAD_QUESTIONS,
-    payload: questions
-  }),
-};
-
-const Operation = {
-  loadQuestions: () => (dispatch, getState, api) => {
-    return api.get(`/questions`)
-      .then((response) => {
-        dispatch(ActionCreator.loadQuestions(adaptQuestions(response.data)));
-      });
-  }
 };
 
 const isQuestionArtistCorrect = (question, answer) => {
@@ -85,31 +65,5 @@ const isQuestionGenreCorrect = (question, answer) => {
   });
 };
 
-const adaptQuestions = (questionsList) => {
-  const QuestionType = {
-    GENRE: `genre`,
-    ARTIST: `artist`
-  };
-  return questionsList.map((question) => {
-    switch (question.type) {
-      case QuestionType.GENRE:
-        const {genre, answers: tracks} = question;
-        return {
-          genre,
-          tracks,
-        };
 
-      case QuestionType.ARTIST:
-        const {song: {artist, src}, answers: options} = question;
-        return {
-          artist,
-          src,
-          options,
-        };
-    }
-
-    return question;
-  });
-};
-
-export {reducer, Operation, ActionType, ActionCreator};
+export {reducer, ActionType, ActionCreator};

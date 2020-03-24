@@ -1,5 +1,4 @@
-import {reducer, ActionType} from './reducer.js';
-import {ActionCreator} from './reducer';
+import {reducer, ActionType, ActionCreator} from './game.js';
 
 const questionGenre = {
   genre: `metall`,
@@ -54,7 +53,6 @@ const initialState = {
   mistakes: 0,
   step: -1,
   maxMistakes: 3,
-  questions: [],
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -62,7 +60,6 @@ it(`Reducer without params should return initial state`, () => {
     mistakes: 0,
     step: -1,
     maxMistakes: 3,
-    questions: [],
   });
 });
 
@@ -74,7 +71,6 @@ it(`Reducer should increment step by given value`, () => {
     mistakes: 0,
     step: 0,
     maxMistakes: 3,
-    questions: [],
   });
 });
 
@@ -82,21 +78,19 @@ it(`Reducer should increment mistakes by given value`, () => {
   expect(reducer(initialState, {
     type: ActionType.INCREMENT_MISTAKES,
     payload: 1
-  })).toEqual({
+  })).toMatchObject({
     mistakes: 1,
     step: -1,
     maxMistakes: 3,
-    questions: [],
   });
 
   expect(reducer(initialState, {
     type: ActionType.INCREMENT_MISTAKES,
     payload: 0
-  })).toEqual({
+  })).toMatchObject({
     mistakes: 0,
     step: -1,
     maxMistakes: 3,
-    questions: [],
   });
 });
 
@@ -133,13 +127,6 @@ describe(`Action creator work correctly`, () => {
     expect(ActionCreator.incrementMistakes(questionArtist, incorrectArtistAnswer)).toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 1,
-    });
-  });
-
-  it(`Action creator load questions get questions`, () => {
-    expect(ActionCreator.loadQuestions([questionGenre, questionArtist])).toEqual({
-      type: ActionType.LOAD_QUESTIONS,
-      payload: [questionGenre, questionArtist]
     });
   });
 });
