@@ -54,7 +54,7 @@ class App extends PureComponent {
     if (question.artist) {
       return (
         <GameScreen type={GameType.ARTIST}>
-          <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
+          <QuestionArtistScreenWrapped question={questions[step]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }
@@ -62,7 +62,7 @@ class App extends PureComponent {
     if (question.genre) {
       return (
         <GameScreen type={GameType.GENRE}>
-          <QuestionGenreScreenWrapped question={questions[0]} onAnswer={onAnswer}/>
+          <QuestionGenreScreenWrapped question={questions[step]} onAnswer={onAnswer}/>
         </GameScreen>
       );
     }

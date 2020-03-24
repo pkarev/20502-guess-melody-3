@@ -37,16 +37,16 @@ const questions = [
     src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     options: [
       {
-        id: 0,
         artist: `Пелагея`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Quincas_Moreira.jpg`,
       },
       {
-        id: 1,
         artist: `Меладзе`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Jesse_Gallagher.jpg`,
       },
       {
-        id: 2,
         artist: `Шнуров`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/sextile.jpg`,
       },
     ]
   },

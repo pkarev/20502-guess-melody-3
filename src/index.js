@@ -4,8 +4,12 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './components/app/app.jsx';
-import {reducer} from './reducer.js';
+import {reducer, Operation} from './reducer.js';
 import {createAPI} from './api.js';
+
+const onUnauthorized = () => {};
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
@@ -15,7 +19,7 @@ const store = createStore(
     )
 );
 
-const api = createAPI();
+store.dispatch(Operation.loadQuestions());
 
 ReactDOM.render(
     <Provider store={store}>
