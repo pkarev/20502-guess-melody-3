@@ -9,11 +9,12 @@ import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.
 import QuestionArtistScreen from '../question-artist-screen/question-artist-screen.jsx';
 import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
 import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
+import ErrorScreen from '../error-screen/error-screen.jsx';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
 import {GameType} from '../../consts.js';
 import {ActionCreator} from '../../reducer/game/game.js';
-import {getQuestions} from '../../reducer/data/selectors.js';
+import {getQuestions, getDataLoadStatus} from '../../reducer/data/selectors.js';
 import {getMaxMistakes, getMistakes, getStep} from '../../reducer/game/selectors.js';
 
 const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
@@ -28,9 +29,16 @@ class App extends PureComponent {
       onWelcomeButtonClick,
       onAnswer,
       onPlayMoreClick,
-      mistakes
+      mistakes,
+      isDataLoadErrorShown
     } = this.props;
     const question = questions[step];
+
+    if (isDataLoadErrorShown) {
+      return (
+        <ErrorScreen/>
+      )
+    }
 
     if (step === -1) {
       return (
@@ -117,6 +125,7 @@ App.propTypes = {
     }),
   ])).isRequired,
   step: PropTypes.number.isRequired,
+  isDataLoadErrorShown: PropTypes.bool.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onPlayMoreClick: PropTypes.func.isRequired,
@@ -127,6 +136,7 @@ const mapStateToProps = (state) => ({
   maxMistakes: getMaxMistakes(state),
   mistakes: getMistakes(state),
   questions: getQuestions(state),
+  isDataLoadErrorShown: getDataLoadStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

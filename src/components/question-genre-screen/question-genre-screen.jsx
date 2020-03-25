@@ -21,7 +21,7 @@ const QuestionGenreScreen = ({question, onAnswer, renderPlayer, onAnswerOptionCh
             onAnswerOptionChange={onAnswerOptionChange}
             answer={answers[index]}
           />
-        ))};
+        ))}
 
         <button className="game__submit button" type="submit">Ответить</button>
       </form>

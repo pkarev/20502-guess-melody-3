@@ -14,6 +14,8 @@ export const getQuestions = createSelector(
     }
 );
 
+export const getDataLoadStatus = (state) => state[NAME_SPACE].isDataLoadErrorShown;
+
 const adaptQuestions = (questionsList) => {
   const QuestionType = {
     GENRE: `genre`,
