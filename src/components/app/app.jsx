@@ -19,6 +19,7 @@ import {getMaxMistakes, getMistakes, getStep} from '../../reducer/game/selectors
 import {getQuestions, getDataLoadStatus} from '../../reducer/data/selectors.js';
 import {AuthStatus} from '../../reducer/user/user.js';
 import {getAuthStatus} from '../../reducer/user/selectors.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 
 const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
@@ -32,6 +33,7 @@ class App extends PureComponent {
       onWelcomeButtonClick,
       onAnswer,
       onPlayMoreClick,
+      onLogin,
       mistakes,
       isDataLoadErrorShown,
       authStatus,
@@ -67,7 +69,7 @@ class App extends PureComponent {
           );
         case AuthStatus.NO_AUTH:
           return (
-            <AuthorizationScreen onLogin={() => {}} onPlayMoreClick={onPlayMoreClick}/>
+            <AuthorizationScreen onLogin={onLogin} onPlayMoreClick={onPlayMoreClick}/>
           );
       }
 
@@ -146,6 +148,7 @@ App.propTypes = {
   onWelcomeButtonClick: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onPlayMoreClick: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -168,6 +171,9 @@ const mapDispatchToProps = (dispatch) => ({
   onPlayMoreClick() {
     dispatch(ActionCreator.resetGame());
   },
+  onLogin(email, password) {
+    dispatch(UserOperation.login(email, password));
+  }
 });
 
 export {App};

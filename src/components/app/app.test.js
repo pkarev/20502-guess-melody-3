@@ -73,6 +73,7 @@ describe(`Render App`, () => {
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
               authStatus={AuthStatus.NO_AUTH}
+              onLogin={() => {}}
             />
           </Provider>
       )
@@ -101,6 +102,7 @@ describe(`Render App`, () => {
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
               authStatus={AuthStatus.NO_AUTH}
+              onLogin={() => {}}
             />
           </Provider>, {
             createNodeMock: () => ({}),
@@ -130,6 +132,7 @@ describe(`Render App`, () => {
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
               authStatus={AuthStatus.NO_AUTH}
+              onLogin={() => {}}
             />
           </Provider>, {
             createNodeMock: () => ({}),

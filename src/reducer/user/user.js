@@ -15,7 +15,7 @@ const ActionCreator = {
   setAuthStatus: (status) => ({
     type: ActionType.SET_AUTH_STATUS,
     payload: status
-  })
+  }),
 };
 
 const Operation = {
@@ -26,6 +26,15 @@ const Operation = {
       })
       .catch((err) => {
         throw err;
+      });
+  },
+  login: (email, password) => (dispatch, getState, api) => {
+    return api.post(`login`, {
+      email,
+      password
+    })
+      .then(() => {
+        dispatch(ActionCreator.setAuthStatus(AuthStatus.AUTH));
       });
   }
 };
@@ -41,4 +50,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, Operation, AuthStatus};
+export {reducer, Operation, AuthStatus, ActionCreator};
