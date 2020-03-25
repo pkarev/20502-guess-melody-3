@@ -10,6 +10,7 @@ import QuestionArtistScreen from '../question-artist-screen/question-artist-scre
 import GameWinScreen from '../game-win-screen/game-win-screen.jsx';
 import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import ErrorScreen from '../error-screen/error-screen.jsx';
+import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
 import {GameType} from '../../consts.js';
@@ -98,6 +99,9 @@ class App extends PureComponent {
             <GameScreen type={GameType.ARTIST}>
               <QuestionArtistScreenWrapped question={questions[1]} onAnswer={onAnswer}/>
             </GameScreen>
+          </Route>
+          <Route exact path="/dev-auth">
+            <AuthorizationScreen onAuth={() => {}} onPlayMoreClick={() => {}}/>
           </Route>
         </Switch>
       </BrowserRouter>
