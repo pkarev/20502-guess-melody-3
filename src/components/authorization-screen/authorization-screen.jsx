@@ -11,12 +11,12 @@ class AuthorizationScreen extends PureComponent {
   }
 
   _handleLogin(evt) {
-    const {onAuth} = this.props;
+    const {onLogin} = this.props;
 
     evt.preventDefault();
     const email = this._emailRef.current.value;
     const password = this._passwordRef.current.value;
-    onAuth(email, password);
+    onLogin(email, password);
   }
 
   render() {
@@ -48,7 +48,7 @@ class AuthorizationScreen extends PureComponent {
 }
 
 AuthorizationScreen.propTypes = {
-  onAuth: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
   onPlayMoreClick: PropTypes.func.isRequired,
 };
 

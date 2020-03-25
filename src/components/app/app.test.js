@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from './app.jsx';
 import NameSpace from '../../reducer/name-space';
+import {AuthStatus} from '../../reducer/user/user';
 
 const mockStore = configureStore([]);
 
@@ -71,6 +72,7 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
+              authStatus={AuthStatus.NO_AUTH}
             />
           </Provider>
       )
@@ -98,6 +100,7 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
+              authStatus={AuthStatus.NO_AUTH}
             />
           </Provider>, {
             createNodeMock: () => ({}),
@@ -126,6 +129,7 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
               isDataLoadErrorShown={false}
+              authStatus={AuthStatus.NO_AUTH}
             />
           </Provider>, {
             createNodeMock: () => ({}),

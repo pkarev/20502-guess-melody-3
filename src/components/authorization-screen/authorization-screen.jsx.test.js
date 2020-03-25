@@ -4,7 +4,7 @@ import AuthorizationScreen from './authorization-screen';
 
 it(`Render Component`, () => {
   const tree = renderer
-  .create(<AuthorizationScreen onAuth={() => {}} onPlayMoreClick={() => {}}/>)
+  .create(<AuthorizationScreen onLogin={() => {}} onPlayMoreClick={() => {}}/>)
   .toJSON();
 
   expect(tree).toMatchSnapshot();

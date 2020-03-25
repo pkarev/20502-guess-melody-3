@@ -15,8 +15,10 @@ import withActivePlayer from '../../hocs/with-active-player/with-active-player.j
 import withGenreAnswers from '../../hocs/with-genre-answers/with-genre-answers.jsx';
 import {GameType} from '../../consts.js';
 import {ActionCreator} from '../../reducer/game/game.js';
-import {getQuestions, getDataLoadStatus} from '../../reducer/data/selectors.js';
 import {getMaxMistakes, getMistakes, getStep} from '../../reducer/game/selectors.js';
+import {getQuestions, getDataLoadStatus} from '../../reducer/data/selectors.js';
+import {AuthStatus} from '../../reducer/user/user.js';
+import {getAuthStatus} from '../../reducer/user/selectors.js';
 
 const QuestionGenreScreenWrapped = withActivePlayer(withGenreAnswers(QuestionGenreScreen));
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
@@ -31,7 +33,8 @@ class App extends PureComponent {
       onAnswer,
       onPlayMoreClick,
       mistakes,
-      isDataLoadErrorShown
+      isDataLoadErrorShown,
+      authStatus,
     } = this.props;
     const question = questions[step];
 
@@ -57,9 +60,18 @@ class App extends PureComponent {
     }
 
     if (step === questions.length) {
-      return (
-        <GameWinScreen wrongAnswers={mistakes} correctAnswers={step - mistakes} onPlayMoreClick={onPlayMoreClick}/>
-      );
+      switch (authStatus) {
+        case AuthStatus.AUTH:
+          return (
+            <GameWinScreen wrongAnswers={mistakes} correctAnswers={step - mistakes} onPlayMoreClick={onPlayMoreClick}/>
+          );
+        case AuthStatus.NO_AUTH:
+          return (
+            <AuthorizationScreen onLogin={() => {}} onPlayMoreClick={onPlayMoreClick}/>
+          );
+      }
+
+      return null;
     }
 
     if (question.artist) {
@@ -101,7 +113,7 @@ class App extends PureComponent {
             </GameScreen>
           </Route>
           <Route exact path="/dev-auth">
-            <AuthorizationScreen onAuth={() => {}} onPlayMoreClick={() => {}}/>
+            <AuthorizationScreen onLogin={() => {}} onPlayMoreClick={() => {}}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -130,6 +142,7 @@ App.propTypes = {
   ])).isRequired,
   step: PropTypes.number.isRequired,
   isDataLoadErrorShown: PropTypes.bool.isRequired,
+  authStatus: PropTypes.string.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onPlayMoreClick: PropTypes.func.isRequired,
@@ -141,6 +154,7 @@ const mapStateToProps = (state) => ({
   mistakes: getMistakes(state),
   questions: getQuestions(state),
   isDataLoadErrorShown: getDataLoadStatus(state),
+  authStatus: getAuthStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
