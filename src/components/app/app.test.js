@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from './app.jsx';
+import NameSpace from '../../reducer/name-space';
 
 const mockStore = configureStore([]);
 
@@ -37,16 +38,16 @@ const questions = [
     src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     options: [
       {
-        id: 0,
         artist: `Пелагея`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Quincas_Moreira.jpg`,
       },
       {
-        id: 1,
         artist: `Меладзе`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Jesse_Gallagher.jpg`,
       },
       {
-        id: 2,
         artist: `Шнуров`,
+        picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/sextile.jpg`,
       },
     ]
   },
@@ -55,7 +56,7 @@ const questions = [
 describe(`Render App`, () => {
   it(`Render WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      mistakes: 0,
     });
 
     const tree = renderer
@@ -69,6 +70,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>
       )
@@ -79,7 +81,9 @@ describe(`Render App`, () => {
 
   it(`Render QuestionGenreScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }
     });
 
     const tree = renderer
@@ -93,6 +97,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>, {
             createNodeMock: () => ({}),
@@ -104,7 +109,9 @@ describe(`Render App`, () => {
 
   it(`Render QuestionArtistScreen`, () => {
     const store = mockStore({
-      mistakes: 3,
+      [NameSpace.GAME]: {
+        mistakes: 3,
+      }
     });
 
     const tree = renderer
@@ -118,6 +125,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>, {
             createNodeMock: () => ({}),

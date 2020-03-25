@@ -1,5 +1,4 @@
-import {reducer, ActionType} from './reducer.js';
-import {ActionCreator} from './reducer';
+import {reducer, ActionType, ActionCreator} from './game.js';
 
 const questionGenre = {
   genre: `metall`,
@@ -44,7 +43,7 @@ const questionArtist = {
     },
   ]
 };
-const questions = [questionGenre, questionArtist];
+
 const correctGenreAnswers = [true, false, false, false];
 const inCorrectGenreAnswers = [false, false, false, false];
 const correctArtistAnswer = `Пелагея`;
@@ -54,7 +53,6 @@ const initialState = {
   mistakes: 0,
   step: -1,
   maxMistakes: 3,
-  questions,
 };
 
 it(`Reducer without params should return initial state`, () => {
@@ -62,29 +60,17 @@ it(`Reducer without params should return initial state`, () => {
     mistakes: 0,
     step: -1,
     maxMistakes: 3,
-    questions,
   });
 });
 
 it(`Reducer should increment step by given value`, () => {
   expect(reducer(initialState, {
     type: ActionType.INCREMENT_STEP,
-    payload: 2
+    payload: 1
   })).toEqual({
     mistakes: 0,
-    step: 1,
+    step: 0,
     maxMistakes: 3,
-    questions,
-  });
-
-  expect(reducer(initialState, {
-    type: ActionType.INCREMENT_STEP,
-    payload: 0
-  })).toEqual({
-    mistakes: 0,
-    step: -1,
-    maxMistakes: 3,
-    questions,
   });
 });
 
@@ -92,21 +78,19 @@ it(`Reducer should increment mistakes by given value`, () => {
   expect(reducer(initialState, {
     type: ActionType.INCREMENT_MISTAKES,
     payload: 1
-  })).toEqual({
+  })).toMatchObject({
     mistakes: 1,
     step: -1,
     maxMistakes: 3,
-    questions,
   });
 
   expect(reducer(initialState, {
     type: ActionType.INCREMENT_MISTAKES,
     payload: 0
-  })).toEqual({
+  })).toMatchObject({
     mistakes: 0,
     step: -1,
     maxMistakes: 3,
-    questions,
   });
 });
 

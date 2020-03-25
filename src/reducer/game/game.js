@@ -1,10 +1,7 @@
-import questions from './mocks/questions.js';
-
 const initialState = {
   mistakes: 0,
   step: -1,
   maxMistakes: 3,
-  questions,
 };
 
 const ActionType = {
@@ -55,7 +52,7 @@ const ActionCreator = {
   },
   resetGame: () => ({
     type: ActionType.RESET_GAME,
-  })
+  }),
 };
 
 const isQuestionArtistCorrect = (question, answer) => {
@@ -67,5 +64,6 @@ const isQuestionGenreCorrect = (question, answer) => {
     return item === (question.tracks[index].genre === question.genre);
   });
 };
+
 
 export {reducer, ActionType, ActionCreator};

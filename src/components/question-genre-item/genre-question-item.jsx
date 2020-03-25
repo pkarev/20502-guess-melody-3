@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const GenreQuestionItem = ({track, id, renderPlayer, onAnswerOptionChange, answer}) => (
-  <div className="track" key={track.id}>
+  <div className="track">
     {renderPlayer(track.src, id)}
     <div className="game__answer">
       <input className="game__input visually-hidden" type="checkbox" name="answer"

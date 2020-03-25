@@ -30,8 +30,8 @@ const QuestionArtistScreen = ({
               }}
             />
             <label className="artist__name" htmlFor={`answer-${index}`}>
-              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-              {option.name}
+              <img className="artist__picture" src={option.picture} alt={option.artist}/>
+              {option.artist}
             </label>
           </div>
         ))}
@@ -46,6 +46,7 @@ QuestionArtistScreen.propTypes = {
     src: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
       artist: PropTypes.string.isRequired,
+      picture: PropTypes.string.isRequired,
     })),
   }),
   onAnswer: PropTypes.func.isRequired,

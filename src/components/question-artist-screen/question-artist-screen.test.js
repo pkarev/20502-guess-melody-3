@@ -11,15 +11,15 @@ const questionArtist = {
   options: [
     {
       artist: `Пелагея`,
-      id: 0,
+      picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Quincas_Moreira.jpg`,
     },
     {
       artist: `Меладзе`,
-      id: 1,
+      picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/Jesse_Gallagher.jpg`,
     },
     {
       artist: `Шнуров`,
-      id: 2,
+      picture: `https://htmlacademy-react-3.appspot.com/guess-melody/static/artist/sextile.jpg`,
     },
   ]
 };
