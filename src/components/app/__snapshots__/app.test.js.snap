@@ -28,14 +28,14 @@ exports[`Render App Render QuestionArtistScreen 1`] = `
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle
+        className="timer__line"
         cx="390"
         cy="390"
-        filter="url(#blur)"
         r="370"
         style={
           Object {
-            "MsTransformOrigin": "center",
-            "WebkitTransformOrigin": "center",
+            "filter": "url(#blur)",
+            "transform": "rotate(-90deg) scaleY(-1)",
             "transformOrigin": "center",
           }
         }
@@ -187,14 +187,14 @@ exports[`Render App Render QuestionGenreScreen 1`] = `
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle
+        className="timer__line"
         cx="390"
         cy="390"
-        filter="url(#blur)"
         r="370"
         style={
           Object {
-            "MsTransformOrigin": "center",
-            "WebkitTransformOrigin": "center",
+            "filter": "url(#blur)",
+            "transform": "rotate(-90deg) scaleY(-1)",
             "transformOrigin": "center",
           }
         }
@@ -354,7 +354,6 @@ exports[`Render App Render QuestionGenreScreen 1`] = `
           </label>
         </div>
       </div>
-      ;
       <button
         className="game__submit button"
         type="submit"

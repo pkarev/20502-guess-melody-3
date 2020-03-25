@@ -37,7 +37,7 @@ class App extends PureComponent {
     if (isDataLoadErrorShown) {
       return (
         <ErrorScreen/>
-      )
+      );
     }
 
     if (step === -1) {

@@ -24,7 +24,7 @@ store.dispatch(Operation.loadQuestions());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App/>,
+      <App/>
     </Provider>,
     document.querySelector(`#root`)
 );

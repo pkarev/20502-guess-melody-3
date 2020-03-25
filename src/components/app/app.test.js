@@ -70,6 +70,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>
       )
@@ -96,6 +97,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>, {
             createNodeMock: () => ({}),
@@ -123,6 +125,7 @@ describe(`Render App`, () => {
               onAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               onPlayMoreClick={() => {}}
+              isDataLoadErrorShown={false}
             />
           </Provider>, {
             createNodeMock: () => ({}),

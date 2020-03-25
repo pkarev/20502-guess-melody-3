@@ -151,7 +151,6 @@ exports[`Render QuestionGenreScreen 1`] = `
         </label>
       </div>
     </div>
-    ;
     <button
       className="game__submit button"
       type="submit"
